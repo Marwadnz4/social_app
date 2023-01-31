@@ -41,22 +41,22 @@ class ChatDetailsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              body: ConditionalBuilder(
-                condition: cubit.messages.isNotEmpty,
-                builder: (context) => Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    children: [
-                      Expanded(
+              body: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    ConditionalBuilder(
+                      condition: cubit.messages.isNotEmpty,
+                      builder: (context) => Expanded(
                         child: ListView.separated(
                           physics: const BouncingScrollPhysics(),
                           itemBuilder: (context, index) {
                             MessageModel message = cubit.messages[index];
 
                             if (cubit.userModel!.uId != message.receiverId) {
-                              return buildMessage(message , true);
+                              return buildMessage(message, true);
                             }
-                            return buildMessage(message , false);
+                            return buildMessage(message, false);
                           },
                           separatorBuilder: (context, index) => const SizedBox(
                             height: 10.0,
@@ -64,101 +64,100 @@ class ChatDetailsScreen extends StatelessWidget {
                           itemCount: cubit.messages.length,
                         ),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.grey,
-                          ),
-                          borderRadius: BorderRadius.circular(15.0),
+                      fallback: (context) => const Spacer(),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.grey,
                         ),
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        padding: const EdgeInsetsDirectional.only(start: 10.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: TextFormField(
-                                controller: messageController,
-                                decoration: const InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'type your message here ...',
-                                ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      padding: const EdgeInsetsDirectional.only(start: 10.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              controller: messageController,
+                              decoration: const InputDecoration(
+                                border: InputBorder.none,
+                                hintText: 'type your message here ...',
                               ),
                             ),
-                            if (cubit.chatImage != null)
-                  Stack(
-                    alignment: AlignmentDirectional.topEnd,
-                    children: [
-                      Container(
-                        height: 140.0,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4.0),
-                          image: DecorationImage(
-                            image: FileImage(cubit.postImage!),
-                            fit: BoxFit.cover,
                           ),
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          cubit.removeChatImage();
-                        },
-                        icon: const CircleAvatar(
-                          radius: 20.0,
-                          child: Icon(
-                            Icons.close,
-                            size: 16.0,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                            Container(
-                              height: 50.0,
-                              color: defaultColor,
-                              child: MaterialButton(
-                                minWidth: 1.0,
-                                onPressed: () {
-                                  SocialCubit.get(context).sendMessage(
-                                    receiverId: userModel.uId!,
-                                    dateTime: DateTime.now().toString(),
-                                    text: messageController.text,
-                                  );
-                                  messageController.text = '';
-                                },
-                                child: const Icon(
-                                  IconBroken.Send,
-                                  size: 16.0,
-                                  color: Colors.white,
+                          if (cubit.chatImage != null)
+                            Stack(
+                              alignment: AlignmentDirectional.topEnd,
+                              children: [
+                                Container(
+                                  height: 140.0,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4.0),
+                                    image: DecorationImage(
+                                      image: FileImage(cubit.postImage!),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                 ),
+                                IconButton(
+                                  onPressed: () {
+                                    cubit.removeChatImage();
+                                  },
+                                  icon: const CircleAvatar(
+                                    radius: 20.0,
+                                    child: Icon(
+                                      Icons.close,
+                                      size: 16.0,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          Container(
+                            height: 50.0,
+                            color: defaultColor,
+                            child: MaterialButton(
+                              minWidth: 1.0,
+                              onPressed: () {
+                                SocialCubit.get(context).sendMessage(
+                                  receiverId: userModel.uId!,
+                                  dateTime: DateTime.now().toString(),
+                                  text: messageController.text,
+                                );
+                                messageController.text = '';
+                              },
+                              child: const Icon(
+                                IconBroken.Send,
+                                size: 16.0,
+                                color: Colors.white,
                               ),
                             ),
-                            const SizedBox(
-                              width: 1.0,
-                            ),
-                            Container(
-                              height: 50.0,
-                              color: defaultColor,
-                              child: MaterialButton(
-                                minWidth: 1.0,
-                                onPressed: () {
-                                  SocialCubit.get(context).getChatImage();
-                                },
-                                child: const Icon(
-                                  IconBroken.Image_2,
-                                  size: 16.0,
-                                  color: Colors.white,
-                                ),
+                          ),
+                          const SizedBox(
+                            width: 1.0,
+                          ),
+                          Container(
+                            height: 50.0,
+                            color: defaultColor,
+                            child: MaterialButton(
+                              minWidth: 1.0,
+                              onPressed: () {
+                                SocialCubit.get(context).getChatImage();
+                              },
+                              child: const Icon(
+                                IconBroken.Image_2,
+                                size: 16.0,
+                                color: Colors.white,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                fallback: (context) =>
-                    const Center(child: CircularProgressIndicator()),
               ),
             );
           },
