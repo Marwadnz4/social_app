@@ -1,7 +1,5 @@
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:social_app/shared/cubit/cubit.dart';
 import 'package:social_app/shared/style/icon_broken.dart';
 
 Widget defaultButton({
@@ -81,7 +79,7 @@ Widget myDivider() => Container(
       height: 1.0,
       margin: const EdgeInsetsDirectional.only(start: 20.0),
     );
-    
+
 void navigateTo(context, widget) => Navigator.push(
     context,
     MaterialPageRoute(

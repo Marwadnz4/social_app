@@ -37,6 +37,8 @@ class NewPostScreen extends StatelessWidget {
                       text: textController.text,
                     );
                   }
+                  cubit.getPosts();
+                  Navigator.pop(context);
                 },
               ),
             ],

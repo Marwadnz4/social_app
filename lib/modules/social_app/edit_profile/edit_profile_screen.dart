@@ -35,36 +35,15 @@ class EditProfileScreen extends StatelessWidget {
               defaultTextButton(
                 title: 'Update',
                 onPressed: () {
-                  if (cubit.profileImage != null) {
-                    cubit.uploadProfileImage(
-                      name: nameController.text,
-                      phone: phoneController.text,
-                      bio: bioController.text,
-                    );
-                  } else if (cubit.coverImage != null) {
-                    cubit.uploadCoverImage(
-                      name: nameController.text,
-                      phone: phoneController.text,
-                      bio: bioController.text,
-                    );
-                  } else if (cubit.profileImage != null && cubit.coverImage != null) {
-                    cubit.uploadCoverImage(
-                      name: nameController.text,
-                      phone: phoneController.text,
-                      bio: bioController.text,
-                    );
-                    cubit.uploadProfileImage(
-                      name: nameController.text,
-                      phone: phoneController.text,
-                      bio: bioController.text,
-                    );
-                  } else {
+                  
                     cubit.updateUserData(
                       name: nameController.text,
                       phone: phoneController.text,
                       bio: bioController.text,
                     );
-                  }
+                  
+                  cubit.getUserData();
+                  Navigator.pop(context);
                 },
               ),
               const SizedBox(

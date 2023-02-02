@@ -11,7 +11,6 @@ import 'package:social_app/modules/social_app/chats/chats_screen.dart';
 import 'package:social_app/modules/social_app/feeds/feeds_screen.dart';
 import 'package:social_app/modules/social_app/new_post/new_post_screen.dart';
 import 'package:social_app/modules/social_app/settings/settings_screen.dart';
-import 'package:social_app/modules/social_app/users/users_screen.dart';
 import 'package:social_app/shared/components/constants.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
@@ -26,7 +25,6 @@ class SocialCubit extends Cubit<SocialStates> {
     const SocialFeedsScreen(),
     const SocialChatsScreen(),
     NewPostScreen(),
-    const SocialUsersScreen(),
     const SocialSettingsScreen(),
   ];
 
@@ -34,7 +32,6 @@ class SocialCubit extends Cubit<SocialStates> {
     'Home',
     'Chats',
     'Post',
-    'Users',
     'Settings',
   ];
 
